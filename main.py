@@ -6,6 +6,7 @@ from colorPicker import get_dominant_color
 from colorPicker import get_palete
 from bleak import BleakScanner
 from bleak import BleakClient
+from WindowsController import WindowsController
 
 
 
@@ -97,10 +98,17 @@ def test():
         
         exit()
 
+async def windows_test():
+    controller = WindowsController()
+    current_path = await controller.get_current_wallpapaper_path()
+    print(f'Current path: {current_path}')
+    print(f'Current scene id: {current_path.split('/')[-2]}')
+
 if __name__ == "__main__":
     loop = asy.get_event_loop()
     try:
-        loop.run_until_complete(run())
+        # loop.run_until_complete(run())
+        loop.run_until_complete(windows_test())
     except RuntimeWarning as ex:
       pass
     except DeprecationWarning as ex:
