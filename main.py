@@ -6,6 +6,8 @@ from colorPicker import get_dominant_color
 from colorPicker import get_palete
 from bleak import BleakScanner
 from bleak import BleakClient
+from WindowsController import WindowsController
+from LinuxController import LinuxController
 
 
 
@@ -97,10 +99,16 @@ def test():
         
         exit()
 
+async def windows_test():
+    controller = WindowsController()
+    print(await controller.get_img_palette())
+    # await controller.check_update()
+
 if __name__ == "__main__":
     loop = asy.get_event_loop()
     try:
-        loop.run_until_complete(run())
+        # loop.run_until_complete(run())
+        loop.run_until_complete(windows_test())
     except RuntimeWarning as ex:
       pass
     except DeprecationWarning as ex:
