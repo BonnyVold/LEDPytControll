@@ -1,4 +1,4 @@
-import asyncio as asy
+import io as asy
 import time
 # import os
 from colorPicker import get_current_wallpaper_img_sway
@@ -25,7 +25,7 @@ num_of_cycle_per_color = 10
 brightness_max = 74
 
 
-async def have_update() -> bool|str:
+def have_update() -> bool|str:
     global prev_img_path
     current_img_path = get_current_wallpaper_img_sway()
     if (current_img_path and prev_img_path != current_img_path):
@@ -42,18 +42,19 @@ def normalize_colors_to_hex(colors: list|tuple) -> list|tuple:
         normalize_colors.append(color)
     return normalize_colors
 
-async def get_device():
+def get_device():
     while True:
-        device = await BleakScanner.find_device_by_address(address_of_controller)
+        device =  BleakScanner.find_device_by_address(address_of_controller)
         if (device):
             return device
     
-async def run():
-    try:
-        # controller = await get_device()
-        async with BleakClient(address_of_controller) as controller:
-            while True:
-                new_path = await have_update()
+def run():
+    pass
+    # try:
+        # controller =  get_device()
+         # with BleakClient(address_of_controller) as controller:
+         #    while True:
+         #        new_path =  have_update()
                 # if(new_path and type(new_path) is str):
                 #     pallets = get_palete(new_path)
                 #     for pallete in pallets: 
@@ -64,30 +65,30 @@ async def run():
                 #         b = normalize_colors[2] 
                 #         print(f'Send new color R:{r} G:{g} B:{b}')
                 #         command_color = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
-                #         await controller.write_gatt_char(UUID, bytes.fromhex(command_color))
+                #          controller.write_gatt_char(UUID, bytes.fromhex(command_color))
                 #         for index in range(1,num_of_cycle_per_color+1):
                 #             brightness_value = hex(round(brightness_max*(index/10)))
                 #             print(f'Set new brightness value: {brightness_value}')
                 #             command_brightness = f'{prefix}{moduleBrightnessId}{brightness_value}ffffff00{postfix}'
                 #             print(command_brightness)
-                #             await controller.write_gatt_char(UUID, bytes.fromhex(command_brightness))
+                #              controller.write_gatt_char(UUID, bytes.fromhex(command_brightness))
                 #             time.sleep(.5)
                 #     if (type(have_update()) is str):
                 #         break
-                if type(new_path) is str:
-                    new_colors = get_dominant_color(new_path)
-                    new_colors = normalize_colors_to_hex(new_colors)
-                    r = new_colors[0]
-                    g = new_colors[1]
-                    b = new_colors[2]
-                    print(f'Send new color R:{r} G:{g} B:{b}')
-                    command = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
-                    await controller.write_gatt_char(UUID, bytes.fromhex(command))
-                else:
-                    print("Sleep")
-                    time.sleep(.5)
-    except RuntimeWarning as ex:
-        pass
+                # if type(new_path) is str:
+                #     new_colors = get_dominant_color(new_path)
+                #     new_colors = normalize_colors_to_hex(new_colors)
+                #     r = new_colors[0]
+                #     g = new_colors[1]
+                #     b = new_colors[2]
+                #     print(f'Send new color R:{r} G:{g} B:{b}')
+                #     command = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
+                #      controller.write_gatt_char(UUID, bytes.fromhex(command))
+                # else:
+                #     print("Sleep")
+                #     time.sleep(.5)
+    # except RuntimeWarning as ex:
+    #     pass
 
 def test():
     img_path = get_current_wallpaper_img_sway() 
@@ -96,20 +97,22 @@ def test():
         normalize_colors = normalize_colors_to_hex(pallete)
         for index in range(1,num_of_cycle_per_color+1):
             brightness_value = hex(round(brightness_max*(index/10)))
-        
         exit()
 
-async def windows_test():
+def windows_test():
     controller = WindowsController()
-    print(await controller.get_img_palette())
-    # await controller.check_update()
+    print(controller.get_img_palette())
+    #  controller.check_update()
 
+def linux_test():
+    controller = LinuxController()
+    print(controller.get_color())
+
+def main(): 
+    linux_test()
+    
 if __name__ == "__main__":
-    loop = asy.get_event_loop()
-    try:
-        # loop.run_until_complete(run())
-        loop.run_until_complete(windows_test())
-    except RuntimeWarning as ex:
-      pass
-    except DeprecationWarning as ex:
-      pass
+    print(f'Start time: {time.strftime('S')}')
+    main()
+    print(f'End time: {time.strftime('S')}')
+    

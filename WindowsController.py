@@ -23,7 +23,7 @@ class WindowsController:
     _file_buffer_name = 'current_scene_buffer.txt'
     __have_update = True
 
-    def __init__(self, wallpaper_dir: str=None):
+    def __init__(self, wallpaper_dir: str|None = None):
 
         if (wallpaper_dir is not None):
             self.__wallpaper_content_base_path = wallpaper_dir
@@ -117,7 +117,8 @@ class WindowsController:
             self._buffer_scene_id = None
             self.__have_update = False
             return False
-        elif self._current_scene_id 
+        elif self._current_scene_id:
+            pass
 
             
 
