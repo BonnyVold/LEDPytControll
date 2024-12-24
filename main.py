@@ -51,42 +51,42 @@ def get_device():
 def run():
     pass
     # try:
-        # controller =  get_device()
-         # with BleakClient(address_of_controller) as controller:
-         #    while True:
-         #        new_path =  have_update()
-                # if(new_path and type(new_path) is str):
-                #     pallets = get_palete(new_path)
-                #     for pallete in pallets: 
-                #         normalize_colors = normalize_colors_to_hex(pallete)
-                #         print(normalize_colors)
-                #         r = normalize_colors[0] 
-                #         g = normalize_colors[1] 
-                #         b = normalize_colors[2] 
-                #         print(f'Send new color R:{r} G:{g} B:{b}')
-                #         command_color = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
-                #          controller.write_gatt_char(UUID, bytes.fromhex(command_color))
-                #         for index in range(1,num_of_cycle_per_color+1):
-                #             brightness_value = hex(round(brightness_max*(index/10)))
-                #             print(f'Set new brightness value: {brightness_value}')
-                #             command_brightness = f'{prefix}{moduleBrightnessId}{brightness_value}ffffff00{postfix}'
-                #             print(command_brightness)
-                #              controller.write_gatt_char(UUID, bytes.fromhex(command_brightness))
-                #             time.sleep(.5)
-                #     if (type(have_update()) is str):
-                #         break
-                # if type(new_path) is str:
-                #     new_colors = get_dominant_color(new_path)
-                #     new_colors = normalize_colors_to_hex(new_colors)
-                #     r = new_colors[0]
-                #     g = new_colors[1]
-                #     b = new_colors[2]
-                #     print(f'Send new color R:{r} G:{g} B:{b}')
-                #     command = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
-                #      controller.write_gatt_char(UUID, bytes.fromhex(command))
-                # else:
-                #     print("Sleep")
-                #     time.sleep(.5)
+        # controller = get_device()
+    #     with BleakClient(address_of_controller) as controller:
+    #         while True:
+    #             new_path =  have_update()
+    #             if(new_path and type(new_path) is str):
+    #                 pallets = get_palete(new_path)
+    #                 for pallete in pallets: 
+    #                     normalize_colors = normalize_colors_to_hex(pallete)
+    #                     print(normalize_colors)
+    #                     r = normalize_colors[0] 
+    #                     g = normalize_colors[1] 
+    #                     b = normalize_colors[2] 
+    #                     print(f'Send new color R:{r} G:{g} B:{b}')
+    #                     command_color = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
+    #                     controller.write_gatt_char(UUID, bytes.fromhex(command_color))
+    #                     for index in range(1,num_of_cycle_per_color+1):
+    #                         brightness_value = hex(round(brightness_max*(index/10)))
+    #                         print(f'Set new brightness value: {brightness_value}')
+    #                         command_brightness = f'{prefix}{moduleBrightnessId}{brightness_value}ffffff00{postfix}'
+    #                         print(command_brightness)
+    #                         controller.write_gatt_char(UUID, bytes.fromhex(command_brightness))
+    #                         time.sleep(.5)
+    #                 if (type(have_update()) is str):
+    #                     break
+    #             if type(new_path) is str:
+    #                 new_colors = get_dominant_color(new_path)
+    #                 new_colors = normalize_colors_to_hex(new_colors)
+    #                 r = new_colors[0]
+    #                 g = new_colors[1]
+    #                 b = new_colors[2]
+    #                 print(f'Send new color R:{r} G:{g} B:{b}')
+    #                 command = f'{prefix}{moduleColorId}03{r}{g}{b}10{postfix}'
+    #                 controller.write_gatt_char(UUID, bytes.fromhex(command))
+    #             else:
+    #                 print("Sleep")
+    #                 time.sleep(.5)
     # except RuntimeWarning as ex:
     #     pass
 
@@ -105,14 +105,15 @@ def windows_test():
     #  controller.check_update()
 
 def linux_test():
-    controller = LinuxController()
-    print(controller.get_color())
+    run()
+    # controller = LinuxController()
+    # print(controller.get_color())
 
 def main(): 
     linux_test()
     
 if __name__ == "__main__":
-    print(f'Start time: {time.strftime('S')}')
+    # print(f'Start time: {time.strftime('S')}')
     main()
-    print(f'End time: {time.strftime('S')}')
+    # print(f'End time: {time.strftime('S')}')
     
